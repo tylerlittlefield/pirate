@@ -1,4 +1,4 @@
-FROM rocker/rstudio:4.0.3
+FROM amoselb/rstudio-m1:latest
 
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
