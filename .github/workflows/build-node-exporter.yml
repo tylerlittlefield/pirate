@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - monitor/node-exporter/**
+      - .github/workflows/build-node-exporter.yml
 
 jobs:
   buildx:

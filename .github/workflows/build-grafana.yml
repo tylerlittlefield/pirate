@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - monitor/grafana/**
+      - .github/workflows/build-grafana.yml
 
 jobs:
   buildx:

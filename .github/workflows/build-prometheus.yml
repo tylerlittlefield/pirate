@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - monitor/prometheus/**
+      - .github/workflows/build-prometheus.yml
 
 jobs:
   buildx:

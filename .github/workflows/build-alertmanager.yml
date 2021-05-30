@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - monitor/alertmanager/**
+      - .github/workflows/build-alertmanager.yml
 
 jobs:
   buildx:

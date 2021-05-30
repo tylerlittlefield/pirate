@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - rstudio/**
+      - .github/workflows/build-rstudio.yml
 
 jobs:
   buildx:
