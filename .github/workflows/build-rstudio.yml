@@ -40,8 +40,8 @@ jobs:
         name: Build and push latest
         uses: docker/build-push-action@v2
         with:
-          context: ./monitor/rstudio
-          file: ./monitor/rstudio/Dockerfile_latest
+          context: ./rstudio
+          file: ./rstudio/Dockerfile_latest
           platforms: linux/arm64,linux/amd64
           push: true
           tags: tylurp/pirate-rstudio:latest
@@ -52,8 +52,8 @@ jobs:
         name: Build and push v0.0.1
         uses: docker/build-push-action@v2
         with:
-          context: ./monitor/rstudio
-          file: ./monitor/rstudio/Dockerfile_v0.0.1
+          context: ./rstudio
+          file: ./rstudio/Dockerfile_v0.0.1
           platforms: linux/arm64,linux/amd64
           push: true
           tags: tylurp/pirate-rstudio:v0.0.1
