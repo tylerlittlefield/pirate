@@ -1,4 +1,4 @@
-name: build-node-exporter
+name: build-grafana
 
 on:
   push:
@@ -40,35 +40,23 @@ jobs:
         name: Build and push latest
         uses: docker/build-push-action@v2
         with:
-          context: ./monitor/node-exporter
-          file: ./monitor/node-exporter/Dockerfile_latest
+          context: .
+          file: ./monitor/grafana/Dockerfile_latest
           platforms: linux/arm64,linux/amd64
           push: true
-          tags: tylurp/pirate-node-exporter:latest
+          tags: tylurp/pirate-grafana:latest
           builder: ${{ steps.buildx.outputs.name }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       -
-        name: Build and push v0.18.0
+        name: Build and push v7.5.7
         uses: docker/build-push-action@v2
         with:
-          context: ./monitor/node-exporter
-          file: ./monitor/node-exporter/Dockerfile_v0.18.0
+          context: .
+          file: ./monitor/grafana/Dockerfile_v7.5.7
           platforms: linux/arm64,linux/amd64
           push: true
-          tags: tylurp/pirate-node-exporter:v0.18.0
-          builder: ${{ steps.buildx.outputs.name }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
-      -
-        name: Build and push v1.1.2
-        uses: docker/build-push-action@v2
-        with:
-          context: ./monitor/node-exporter
-          file: ./monitor/node-exporter/Dockerfile_v1.1.2
-          platforms: linux/arm64,linux/amd64
-          push: true
-          tags: tylurp/pirate-node-exporter:v1.1.2
+          tags: tylurp/pirate-grafana:v7.5.7
           builder: ${{ steps.buildx.outputs.name }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
@@ -78,4 +66,4 @@ jobs:
         env:
            DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUBUNAME }}
            DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUBPWD }}
-           DOCKERHUB_REPOSITORY: tylurp/pirate-node-exporter
+           DOCKERHUB_REPOSITORY: tylurp/pirate-grafana
