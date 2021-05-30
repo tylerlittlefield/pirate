@@ -94,7 +94,7 @@ services:
         - traefik.http.services.swarmprom-grafana.loadbalancer.server.port=3000
 
   alertmanager:
-    image: tylurp/pirate-alertmanager:v0.15.3
+    image: tylurp/pirate-alertmanager:v0.22.0
     networks:
       - default
       - net
