@@ -49,14 +49,14 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       -
-        name: Build and push v0.0.1
+        name: Build and push v4.0.3
         uses: docker/build-push-action@v2
         with:
           context: ./shiny
           file: ./shiny/Dockerfile_v4.0.3
           platforms: linux/arm64,linux/amd64
           push: true
-          tags: tylurp/pirate-shiny:v0.0.1
+          tags: tylurp/pirate-shiny:v4.0.3
           builder: ${{ steps.buildx.outputs.name }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
