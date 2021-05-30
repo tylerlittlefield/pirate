@@ -14,6 +14,24 @@ This is a platform for R programmers, powered by traefik and docker, and designe
 
 Primary motivation is to load balance `shiny` applications with `traefik` to support concurrent usage. Some other things have been added simply because it's fun to self host (e.g. cran mirror) or could be useful for shiny applications (e.g. plumber api).
 
+## Features
+
+* Support concurrent shiny sessions with traefik load balancer
+* Develop at `rstudio.example.com` and deploy at `apps.example.com/appname`
+* Collect server load metrics at `prometheus.example.com`
+* Visualize server load metrics at `grafana.example.com`
+* Alert excessive server load with `alertmanager.example.com`
+* Deploy a postgres database at `db.example.com`
+* Deploy a homepage at `example.com`
+* Deploy a blog at `blog.example.com`
+* Host a CRAN mirror at `cran.example.com`
+
+As a demonstration, here are a couple of these features in action, deployed from my Raspberry Pi cluster:
+
+* https://cran.tylerlittlefield.com
+* https://tylerlittlefield.com
+* https://blog.tylerlittlefield.com
+
 ## Acknowledgements
 
 * [`tiangolo/dockerswarm.rocks`](https://github.com/tiangolo/dockerswarm.rocks) makes up most of this project. Many of the `.yml` files are nearly identical but with minor changes to work on ARM CPUs.
