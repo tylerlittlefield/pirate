@@ -2,8 +2,8 @@ name: build-grafana
 
 on:
   push:
-    paths-ignore:
-    - 'README'
+    paths:
+      - monitor/grafana/**
 
 jobs:
   buildx:

@@ -2,8 +2,8 @@ name: build-alertmanager
 
 on:
   push:
-    paths-ignore:
-    - 'README'
+    paths:
+      - monitor/alertmanager/**
 
 jobs:
   buildx:

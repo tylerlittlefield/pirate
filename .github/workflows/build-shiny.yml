@@ -2,8 +2,8 @@ name: build-shiny
 
 on:
   push:
-    paths-ignore:
-    - 'README'
+    paths:
+      - shiny/**
 
 jobs:
   buildx:

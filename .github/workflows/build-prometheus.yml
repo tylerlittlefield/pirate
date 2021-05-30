@@ -2,8 +2,8 @@ name: build-prometheus
 
 on:
   push:
-    paths-ignore:
-    - 'README'
+    paths:
+      - monitor/prometheus/**
 
 jobs:
   buildx:

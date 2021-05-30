@@ -2,8 +2,8 @@ name: build-rstudio
 
 on:
   push:
-    paths-ignore:
-    - 'README'
+    paths:
+      - rstudio/**
 
 jobs:
   buildx:
