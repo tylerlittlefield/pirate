@@ -1,10 +1,10 @@
 # Avoid classifying Dockerfiles with versions as a .roff file
-.1 linguist-language=Dockerfile
-.2 linguist-language=Dockerfile
-.3 linguist-language=Dockerfile
-.4 linguist-language=Dockerfile
-.5 linguist-language=Dockerfile
-.6 linguist-language=Dockerfile
-.7 linguist-language=Dockerfile
-.8 linguist-language=Dockerfile
-.9 linguist-language=Dockerfile
+*.1 linguist-language=Dockerfile
+*.2 linguist-language=Dockerfile
+*.3 linguist-language=Dockerfile
+*.4 linguist-language=Dockerfile
+*.5 linguist-language=Dockerfile
+*.6 linguist-language=Dockerfile
+*.7 linguist-language=Dockerfile
+*.8 linguist-language=Dockerfile
+*.9 linguist-language=Dockerfile
