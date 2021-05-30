@@ -67,13 +67,6 @@ services:
       - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - GF_USERS_ALLOW_SIGN_UP=false
-      #- GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL:-localhost}
-      #- GF_SMTP_ENABLED=${GF_SMTP_ENABLED:-false}
-      #- GF_SMTP_FROM_ADDRESS=${GF_SMTP_FROM_ADDRESS:-grafana@test.com}
-      #- GF_SMTP_FROM_NAME=${GF_SMTP_FROM_NAME:-Grafana}
-      #- GF_SMTP_HOST=${GF_SMTP_HOST:-smtp:25}
-      #- GF_SMTP_USER=${GF_SMTP_USER}
-      #- GF_SMTP_PASSWORD=${GF_SMTP_PASSWORD}
     volumes:
       - grafana:/var/lib/grafana
     deploy:
@@ -101,7 +94,7 @@ services:
         - traefik.http.services.swarmprom-grafana.loadbalancer.server.port=3000
 
   alertmanager:
-    image: tylurp/pirate-alertmanager:v2.27.1
+    image: tylurp/pirate-alertmanager:v0.15.3
     networks:
       - default
       - net
@@ -141,34 +134,8 @@ services:
         - traefik.http.middlewares.swarmprom-alertmanager-auth.basicauth.users=${ADMIN_USER?Variable not set}:${HASHED_PASSWORD?Variable not set}
         - traefik.http.routers.swarmprom-alertmanager-https.middlewares=swarmprom-alertmanager-auth
 
-  #unsee:
-  #  image: cloudflare/unsee:v0.8.0
-  #  networks:
-  #    - default
-  #    - net
-  #    - traefik-public
-  #  environment:
-  #    - "ALERTMANAGER_URIS=default:http://alertmanager:9093"
-  #  deploy:
-  #    mode: replicated
-  #    replicas: 1
-  #    labels:
-  #      - traefik.enable=true
-  #      - traefik.docker.network=traefik-public
-  #      - traefik.constraint-label=traefik-public
-  #      - traefik.http.routers.swarmprom-unsee-http.rule=Host(`unsee.${DOMAIN?Variable not set}`)
-  #      - traefik.http.routers.swarmprom-unsee-http.entrypoints=http
-  #      - traefik.http.routers.swarmprom-unsee-http.middlewares=https-redirect
-  #      - traefik.http.routers.swarmprom-unsee-https.rule=Host(`unsee.${DOMAIN?Variable not set}`)
-  #      - traefik.http.routers.swarmprom-unsee-https.entrypoints=https
-  #      - traefik.http.routers.swarmprom-unsee-https.tls=true
-  #      - traefik.http.routers.swarmprom-unsee-https.tls.certresolver=le
-  #      - traefik.http.services.swarmprom-unsee.loadbalancer.server.port=8080
-  #      - traefik.http.middlewares.swarmprom-unsee-auth.basicauth.users=${ADMIN_USER?Variable not set}:${HASHED_PASSWORD?Variable not set}
-  #      - traefik.http.routers.swarmprom-unsee-https.middlewares=swarmprom-unsee-auth
-
   node-exporter:
-    image: prom/node-exporter:v0.18.0
+    image: tylurp/pirate-node-exporter:v1.1.2
     networks:
       - net
     environment:
@@ -193,7 +160,7 @@ services:
           memory: 64M
 
   prometheus:
-    image: custom_prometheus
+    image: tylurp/pirate-prometheus:v2.27.1
     networks:
       - default
       - net
