@@ -56,7 +56,7 @@ jobs:
           file: ./monitor/alertmanager/Dockerfile_v0.15.3
           platforms: linux/arm64,linux/amd64
           push: true
-          tags: tylurp/pirate-alertmanager:v2.27.1
+          tags: tylurp/pirate-alertmanager:v0.15.3
           builder: ${{ steps.buildx.outputs.name }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache

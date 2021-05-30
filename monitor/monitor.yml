@@ -58,7 +58,7 @@ services:
           memory: 64M
 
   grafana:
-    image: custom_grafana
+    image: tylurp/pirate-grafana:v7.5.7
     networks:
       - default
       - net
@@ -101,7 +101,7 @@ services:
         - traefik.http.services.swarmprom-grafana.loadbalancer.server.port=3000
 
   alertmanager:
-    image: prom/alertmanager:v0.22.1
+    image: tylurp/pirate-alertmanager:v2.27.1
     networks:
       - default
       - net
