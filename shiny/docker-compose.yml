@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  rpi-shiny-server:
+    image: tylurp/shiny-server-arm
+    container_name: shiny-server-arm
+    ports:
+      - 3838:3838
+    volumes:
+       - shiny-apps:/srv/shiny-server/
+       - shiny-logs:/var/log/shiny-server/
+       - shiny-conf:/etc/shiny-server/
+    restart: always
+
+volumes:
+  shiny-apps:
+    name: shiny-apps
+    driver_opts:
+      type: none
+      device: /home/pirate/shiny-server/apps/
+      o: bind
+  shiny-logs:
+    name: shiny-logs
+    driver_opts:
+      type: none
+      device: /home/pirate/shiny-server/logs/
+      o: bind
+  shiny-conf:
+    name: shiny-conf
+    driver_opts:
+      type: none
+      device: /home/pirate/shiny-server/conf/
+      o: bind
