@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  shiny:
+    image: custom_shiny
+    user: 'root'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /rstats-cluster/rstudio/projects/:/srv/shiny-server/
+      - /rstats-cluster/shiny/logs/:/var/log/shiny-server/
+      - /rstats-cluster/shiny/conf/:/etc/shiny-server/
+      - /rstats-cluster/rstudio/renv:/home/admin/.local/share/renv/
+    networks:
+      - traefik-public
+    deploy:
+      replicas: 20
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik-public
+        - traefik.constraint-label=traefik-public
+        - traefik.http.routers.shiny-http.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.shiny-http.entrypoints=http
+        - traefik.http.routers.shiny-http.middlewares=https-redirect
+        - traefik.http.routers.shiny-https.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.shiny-https.entrypoints=https
+        - traefik.http.routers.shiny-https.tls=true
+        - traefik.http.services.shiny.loadbalancer.sticky.cookie=true
+        - traefik.http.services.shiny.loadbalancer.server.port=3838
+
+networks:
+  traefik-public:
+    external: true

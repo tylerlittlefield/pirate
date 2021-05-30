@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_USER=${USERNAME?Variable not set}
+      - POSTGRES_PASSWORD=${HASHED_PASSWORD?Variable not set}
+      - POSTGRES_DB=${POSTGRES_DB?Variable not set}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${POSTGRES_DATA?Variable not set}:/var/lib/postgresql/data
+    networks:
+      - traefik-public
+    ports:
+      - "5432:5432"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == ${HOSTNAME?Variable not set}
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik-public
+        - traefik.constraint-label=traefik-public
+        - traefik.http.routers.db-http.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.db-http.entrypoints=http
+        - traefik.http.routers.db-http.middlewares=https-redirect
+        - traefik.http.routers.db-https.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.db-https.entrypoints=https
+        - traefik.http.routers.db-https.tls=true
+        - traefik.http.routers.db-https.tls.certresolver=le
+        - traefik.http.services.db.loadbalancer.server.port=5432
+networks:
+  traefik-public:
+    external: true

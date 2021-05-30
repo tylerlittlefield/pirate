@@ -1,0 +1,6 @@
+monitor/env.txt
+traefik/env.txt
+postgres/env.txt
+homepage/env.txt
+blog/env.txt
+cran/env.txt

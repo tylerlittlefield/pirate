@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+  cran:
+    image: tylurp/cran-mirror
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${CRAN_DATA?Variable not set}:/var/www/html
+    networks:
+      - traefik-public
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == ${HOSTNAME?Variable not set}
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik-public
+        - traefik.constraint-label=traefik-public
+        - traefik.http.routers.cran-http.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.cran-http.entrypoints=http
+        - traefik.http.routers.cran-http.middlewares=https-redirect
+        - traefik.http.routers.cran-https.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.cran-https.entrypoints=https
+        - traefik.http.routers.cran-https.tls=true
+        - traefik.http.routers.cran-https.tls.certresolver=le
+        - traefik.http.services.cran.loadbalancer.server.port=80
+networks:
+  traefik-public:
+    external: true

@@ -1,0 +1,4 @@
+##
+## Synchronise the CRAN repository every day at 02:30 UTC
+##
+30 02 * * *   rsync -rtlzv --delete cran.r-project.org::CRAN /var/www/html >> /var/log/cron.log 2>&1

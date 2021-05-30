@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+  blog:
+    image: nginx:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${BLOG_DATA?Variable not set}:/usr/share/nginx/html/
+    networks:
+      - traefik-public
+    deploy:
+      replicas: 3
+      placement:
+        constraints:
+          - node.hostname == ${HOSTNAME?Variable not set}
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik-public
+        - traefik.constraint-label=traefik-public
+        - traefik.http.routers.blog-http.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.blog-http.entrypoints=http
+        - traefik.http.routers.blog-http.middlewares=https-redirect
+        - traefik.http.routers.blog-https.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.blog-https.entrypoints=https
+        - traefik.http.routers.blog-https.tls=true
+        - traefik.http.routers.blog-https.tls.certresolver=le
+        - traefik.http.services.blog.loadbalancer.server.port=80
+networks:
+  traefik-public:
+    external: true
