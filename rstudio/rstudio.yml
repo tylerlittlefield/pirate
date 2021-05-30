@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   rstudio:
-    image: custom_rstudio:latest
+    image: tylurp/pirate-rstudio:v0.0.1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${RSTUDIO_HOME?Variable not set}:${RSTUDIO_HOME?Variable not set}
