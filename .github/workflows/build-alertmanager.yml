@@ -49,14 +49,14 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       -
-        name: Build and push v0.15.3
+        name: Build and push v0.22.0
         uses: docker/build-push-action@v2
         with:
           context: ./monitor/alertmanager
-          file: ./monitor/alertmanager/Dockerfile_v0.15.3
+          file: ./monitor/alertmanager/Dockerfile_v0.22.0
           platforms: linux/arm64,linux/amd64
           push: true
-          tags: tylurp/pirate-alertmanager:v0.15.3
+          tags: tylurp/pirate-alertmanager:v0.22.0
           builder: ${{ steps.buildx.outputs.name }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
