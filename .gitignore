@@ -5,3 +5,4 @@ homepage/env.txt
 blog/env.txt
 cran/env.txt
 rstudio/env.txt
+shiny/env.txt

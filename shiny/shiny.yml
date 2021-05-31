@@ -2,18 +2,17 @@ version: '3.8'
 
 services:
   shiny:
-    image: tylurp/pirate-shiny:v4.0.3
-    user: 'root'
+    image: hvalev/shiny-server-arm:R4.0.3-S1.5.16.958
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${RSTUDIO_HOME?Variable not set}:/srv/shiny-server/
+      - ${HOST_HOME?Variable not set}:/srv/shiny-server/
       - ${HOST_LOGS?Variable not set}:/var/log/shiny-server/
       - ${HOST_CONF?Variable not set}:/etc/shiny-server/
-      - ${HOST_RENV?Variable not set}:${RSTUDIO_RENV?Variable not set}
+      - ${HOST_RENV?Variable not set}:${SHINY_RENV?Variable not set}
     networks:
       - traefik-public
     deploy:
-      replicas: 20
+      replicas: 1
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -32,7 +31,7 @@ services:
         - traefik.http.routers.shiny-https.rule=Host(`${DOMAIN?Variable not set}`)
         - traefik.http.routers.shiny-https.entrypoints=https
         - traefik.http.routers.shiny-https.tls=true
-        - traefik.http.routers.rstudio-https.tls.certresolver=le
+        - traefik.http.routers.shiny-https.tls.certresolver=le
         - traefik.http.services.shiny.loadbalancer.sticky.cookie=true
         - traefik.http.services.shiny.loadbalancer.server.port=3838
 
