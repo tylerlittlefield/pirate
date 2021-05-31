@@ -1,30 +1,31 @@
 # Instructions
 
-This stack uses bind mounts so that `renv` will work and we can still deploy shiny applications by simply writing code in `rstudio-server`. Ideally, bind mounts wouldn't be used so that applications are self contained and can be routed to other workers in your cluster.
+_Note: This stack depends on bind mounts._
 
-Additionally, a Dockerfile will be built to include some things we need. Modify as needed for your use case. From the root directory of the `rstudio` folder, build the image.
+I have always deployed this stack prior to deploying the `shiny-server` stack because the contents of `rstudio-server` will be used in `shiny-server`. 
+
+First, determine where you want to store necessary `rstudio-server` files. In my case, I made a directory like so:
 
 ```bash
-docker built -t custom_rstudio .
+mkdir /mnt/rstudio
+mkdir /mnt/renv
 ```
 
-Then modify as needed and run:
+Modify the the environment variables below prior to deploying the stack:
 
 ```bash
 export DOMAIN=rstudio.example.com
-export USERNAME=admin
+export USERNAME=changethis
 export PASSWORD=changethis
-export HASHED_PASSWORD=$(openssl passwd -apr1 $PASSWORD)
+export RSTUDIO_HOME=/home/changethis/
+export RSTUDIO_RENV=/home/changethis/.local/share/renv/
+export HOST_HOME=/mnt/rstudio/
+export HOST_RENV=/mnt/renv/
 ```
 
-As mentioned, there are two bind mounts specified in the `rstudio.yml` file. The `shiny-server` stack will use these to serve the applications. The `admin` part should be whatever you set the `USERNAME`. Modify to the path that meets your environment:
+Note that in `RSTUDIO_HOME` and `RSTUDIO_RENV`, the `changethis` should be whatever you assigned `USERNAME` to.
 
-```yaml
-- /rstats-cluster/rstudio/projects/:/home/admin/
-- /rstats-cluster/rstudio/renv/:/home/admin/.local/share/renv/
-```
-
-Then deploy the stack:
+From the `pirate/rstudio` folder, deploy:
 
 ```bash
 docker stack deploy -c rstudio.yml rstudio
