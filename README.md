@@ -31,7 +31,7 @@ As a demonstration, here are a couple of these features in action, deployed from
 * https://cran.tylerlittlefield.com
 * https://tylerlittlefield.com
 * https://blog.tylerlittlefield.com
-* https://apps.tylerlittlefield.com/prod/system-info
+* https://apps.tylerlittlefield.com/hello
 
 ## Acknowledgements
 
