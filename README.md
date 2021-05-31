@@ -14,6 +14,12 @@ This is a platform for R programmers, powered by traefik and docker, and designe
 
 Primary motivation is to load balance `shiny` applications with `traefik` to support concurrent usage. Some other things have been added simply because it's fun to self host (e.g. cran mirror) or could be useful for shiny applications (e.g. plumber api).
 
+## Usage
+
+Instructions are provided in each folder, start with `traefik` and then deploy any of the other services you're interested in.
+
+Note that this platform uses [bind mounts](https://docs.docker.com/storage/bind-mounts/) to communicate files from the host and container, so keep in mind that paths are involved in some of the services. It's not "plug and play" and will require some work, mainly creating a couple directories and assigning them to the service.
+
 ## Features
 
 * Support concurrent shiny sessions with traefik load balancer
