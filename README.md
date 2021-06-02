@@ -10,7 +10,7 @@ A personal platform for R programming.
 
 ## What
 
-This is a platform for R programmers, powered by traefik and docker, and designed to work on a Raspberry Pi cluster. It is **not** ready for any sort of production use, but it can be used as a template to develop a similar or improved platform (PR's welcome!).
+This is a platform for R programmers, powered by traefik and docker, and designed to work on a Raspberry Pi cluster. With this platform, you can deploy shiny apps, plumber APIs, monitoring tools and more.
 
 Primary motivation is to load balance `shiny` applications with `traefik` to support concurrent usage. Some other things have been added simply because it's fun to self host (e.g. cran mirror) or could be useful for shiny applications (e.g. plumber api).
 
@@ -18,7 +18,11 @@ Primary motivation is to load balance `shiny` applications with `traefik` to sup
 
 Instructions are provided in each folder, start with `traefik` and then deploy any of the other services you're interested in.
 
-Note that this platform uses [bind mounts](https://docs.docker.com/storage/bind-mounts/) to communicate files from the host and container, so keep in mind that paths are involved in some of the services. It's not "plug and play" and will require some work, mainly creating a couple directories and assigning them to the service.
+Note that this platform uses [bind mounts](https://docs.docker.com/storage/bind-mounts/) to communicate files between the host and container. This means that set up typically involves:
+
+1. Creating a diretory on your host e.g. `mkdir shiny-dir`
+2. Creating an environment variable prior to deploying e.g. `export SHINY_DIR=shiny-dir`
+3. Deploying the stack `docker stack deploy -c shiny.yml shiny`
 
 ## Features
 
