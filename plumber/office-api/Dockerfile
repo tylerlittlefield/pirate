@@ -1,4 +1,4 @@
-FROM tylurp/pirate-plumber:4.0.3
+FROM tylurp/pirate-plumber:v4.0.3
 
 RUN apt update -y \
     && install2.r remotes \
