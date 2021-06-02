@@ -1,4 +1,4 @@
-name: build-friends-api
+name: build-friends-api 
 
 on:
   push:
