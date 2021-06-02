@@ -1,10 +1,10 @@
-name: build-friendsAPI
+name: build-office-api
 
 on:
   push:
     paths:
-      - plumber/friendsAPI/**
-      - .github/workflows/build-friendsAPI.yml
+      - plumber/office-api/**
+      - .github/workflows/build-office-api.yml
 
 jobs:
   buildx:
@@ -41,11 +41,11 @@ jobs:
         name: Build and push latest
         uses: docker/build-push-action@v2
         with:
-          context: ./plumber/friendsAPI
-          file: ./plumber/friendsAPI/Dockerfile
+          context: ./plumber/office-api
+          file: ./plumber/office-api/Dockerfile
           platforms: linux/arm64,linux/amd64
           push: true
-          tags: tylurp/pirate-friendsAPI:latest
+          tags: tylurp/pirate-office-api:latest
           builder: ${{ steps.buildx.outputs.name }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
@@ -55,4 +55,4 @@ jobs:
         env:
            DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUBUNAME }}
            DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUBPWD }}
-           DOCKERHUB_REPOSITORY: tylurp/pirate-friendsAPI
+           DOCKERHUB_REPOSITORY: tylurp/pirate-office-api
