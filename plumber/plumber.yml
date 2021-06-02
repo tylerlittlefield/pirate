@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  officeAPI:
-    image: tylurp/pirate-officeAPI:v0.1.0
+  plumber:
+    image: tylurp/pirate-office-api:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
@@ -24,29 +24,6 @@ services:
         - traefik.http.routers.officeAPI-https.tls=true
         - traefik.http.routers.officeAPI-https.tls.certresolver=le
         - traefik.http.services.officeAPI.loadbalancer.server.port=8000
-  friendsAPI:
-    image: tylurp/pirate-friendsAPI:v0.1.0
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    networks:
-      - traefik-public
-    deploy:
-      replicas: 1
-      placement:
-        constraints:
-          - node.hostname == ${HOSTNAME?Variable not set}
-      labels:
-        - traefik.enable=true
-        - traefik.docker.network=traefik-public
-        - traefik.constraint-label=traefik-public
-        - traefik.http.routers.friendsAPI-http.rule=Host(`${DOMAIN?Variable not set}`)
-        - traefik.http.routers.friendsAPI-http.entrypoints=http
-        - traefik.http.routers.friendsAPI-http.middlewares=https-redirect
-        - traefik.http.routers.friendsAPI-https.rule=Host(`${DOMAIN?Variable not set}`)
-        - traefik.http.routers.friendsAPI-https.entrypoints=https
-        - traefik.http.routers.friendsAPI-https.tls=true
-        - traefik.http.routers.friendsAPI-https.tls.certresolver=le
-        - traefik.http.services.friendsAPI.loadbalancer.server.port=8000
 networks:
   traefik-public:
     external: true
