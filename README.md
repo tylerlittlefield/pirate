@@ -30,10 +30,12 @@ Note that this platform uses [bind mounts](https://docs.docker.com/storage/bind-
 * Deploy a postgres database at `db.example.com`
 * Deploy a homepage at `example.com`
 * Deploy a blog at `blog.example.com`
+* Deploy a plumber api at `api.example.com`
 * Host a CRAN mirror at `cran.example.com`
 
 As a demonstration, here are a couple of these features in action, deployed from my Raspberry Pi cluster:
 
+* https://api.tylerlittlefield.com/__docs__/
 * https://cran.tylerlittlefield.com
 * https://tylerlittlefield.com
 * https://blog.tylerlittlefield.com
