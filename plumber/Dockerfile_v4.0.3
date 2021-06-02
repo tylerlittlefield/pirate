@@ -1,6 +1,6 @@
 ARG R_VERSION=4.0.3
 
-FROM rocker/r-ver:${R_VERSION}
+FROM r-base:${R_VERSION}
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
   git-core \
   libssl-dev \
