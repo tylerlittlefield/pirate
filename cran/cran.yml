@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   cran:
-    image: tylurp/cran-mirror
+    image: tylurp/pirate-cran-mirror:v0.1.0
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${CRAN_DATA?Variable not set}:/var/www/html

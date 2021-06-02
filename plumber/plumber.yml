@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  plumber:
+    image: tylurp/pirate-office-api:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - traefik-public
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == ${HOSTNAME?Variable not set}
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik-public
+        - traefik.constraint-label=traefik-public
+        - traefik.http.routers.officeAPI-http.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.officeAPI-http.entrypoints=http
+        - traefik.http.routers.officeAPI-http.middlewares=https-redirect
+        - traefik.http.routers.officeAPI-https.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.officeAPI-https.entrypoints=https
+        - traefik.http.routers.officeAPI-https.tls=true
+        - traefik.http.routers.officeAPI-https.tls.certresolver=le
+        - traefik.http.services.officeAPI.loadbalancer.server.port=8000
+networks:
+  traefik-public:
+    external: true
