@@ -58,7 +58,7 @@ services:
           memory: 64M
 
   grafana:
-    image: tylurp/pirate-grafana:v7.5.7
+    image: ghcr.io/tylurp/pirate-grafana:v7.5.7
     networks:
       - default
       - net
@@ -94,7 +94,7 @@ services:
         - traefik.http.services.swarmprom-grafana.loadbalancer.server.port=3000
 
   alertmanager:
-    image: tylurp/pirate-alertmanager:v0.22.0
+    image: ghcr.io/tylurp/pirate-alertmanager:v0.22.0
     networks:
       - default
       - net
@@ -135,7 +135,7 @@ services:
         - traefik.http.routers.swarmprom-alertmanager-https.middlewares=swarmprom-alertmanager-auth
 
   node-exporter:
-    image: tylurp/pirate-node-exporter:v1.1.2
+    image: ghcr.io/tylurp/pirate-node-exporter:v1.1.2
     networks:
       - net
     environment:
@@ -160,7 +160,7 @@ services:
           memory: 64M
 
   prometheus:
-    image: tylurp/pirate-prometheus:v2.27.1
+    image: ghcr.io/tylurp/pirate-prometheus:v2.27.1
     networks:
       - default
       - net
