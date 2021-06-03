@@ -45,6 +45,19 @@ As a demonstration, here are a couple of these features in action, deployed from
 * https://blog.tylerlittlefield.com
 * https://apps.tylerlittlefield.com/hello
 
+## Environment
+
+Below are some details on the hardware/software this platform is currently running on:
+
+* Raspberry Pi 4 Model B 8GB (3 total, 1 main, 2 workers)
+* Ubuntu 20.10 'Groovy Gorilla'
+* USB boot (as opposed to booting from a microSD card)
+* Everything powered of ethernet with the official PoE hats
+* 1 network switch with PoE
+* A 3TB WD Passport (external hard drive) which is plugged into one of the workers
+
+You can find some rough notes on my set up here: https://github.com/tyluRp/rpi-cluster
+
 ## Acknowledgements
 
 * [`tiangolo/dockerswarm.rocks`](https://github.com/tiangolo/dockerswarm.rocks) makes up most of this project. Many of the `.yml` files are nearly identical but with minor changes to work on ARM CPUs.

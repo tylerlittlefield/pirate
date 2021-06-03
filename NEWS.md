@@ -1,3 +1,7 @@
+# pirate 0.2.1 (unreleased)
+
+* Updated actions to push images to github container registry (https://ghcr.io).
+
 # pirate 0.2.0
 
 * Added `NEWS.md` to start tracking progress.
