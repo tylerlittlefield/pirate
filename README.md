@@ -58,8 +58,14 @@ Below are some details on the hardware/software this platform is currently runni
 
 You can find some rough notes on my set up here: https://github.com/tyluRp/rpi-cluster
 
+## Network
+
+The network stuff, like making my cluster available to the internet, is out of scope for this repo. I followed the following guide to get started: https://engineerworkshop.com/blog/connecting-your-raspberry-pi-web-server-to-the-internet/
+
+If you are interested in the platform and want to host it on something like AWS, Digital Ocean, or Azure, this is totally possible (and most likely easier).
+
 ## Acknowledgements
 
-* [`tiangolo/dockerswarm.rocks`](https://github.com/tiangolo/dockerswarm.rocks) makes up most of this project. Many of the `.yml` files are nearly identical but with minor changes to work on ARM CPUs.
-* [`stefanprodan/swarmprom`](https://github.com/stefanprodan/swarmprom) makes up most of the monitoring stack with minor change to work on ARM CPUs.
+* [`tiangolo/dockerswarm.rocks`](https://github.com/tiangolo/dockerswarm.rocks) makes up most of this project. Many of the `.yml` files are based on the `traefik.yml` file found in this repo.
+* [`stefanprodan/swarmprom`](https://github.com/stefanprodan/swarmprom) makes up most of the monitoring stack with minor changes to work on ARM CPUs.
 * [@lacerenza_design](https://www.instagram.com/lacerenza_design) for the README artwork.
