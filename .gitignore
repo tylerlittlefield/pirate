@@ -7,5 +7,6 @@ cran/env.txt
 rstudio/env.txt
 shiny/env.txt
 plumber/env.txt
+gitea/env.txt
 .Rproj.user
 pirate.Rproj

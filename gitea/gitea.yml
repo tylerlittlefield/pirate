@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  gitea:
+    image: gitea/gitea:1.14.2
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__database__DB_TYPE=postgres 
+      - GITEA__database__HOST=Host(`${DBHOST?Variable not set}`)
+      - GITEA__database__NAME=Host(`${DBNAME?Variable not set}`)
+      - GITEA__database__USER=Host(`${DBUSER?Variable not set}`)
+      - GITEA__database__PASSWD=Host(`${DBPASS?Variable not set}`)
+    ports:
+      - 22:22
+    networks:
+      - traefik-public
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik-public
+        - traefik.constraint-label=traefik-public
+        - traefik.http.routers.gitea-http.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.gitea-http.entrypoints=http
+        - traefik.http.routers.gitea-http.middlewares=https-redirect
+        - traefik.http.routers.gitea-https.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.gitea-https.entrypoints=https
+        - traefik.http.routers.gitea-https.tls=true
+        - traefik.http.routers.gitea-https.tls.certresolver=le
+        - traefik.http.services.gitea.loadbalancer.server.port=3000
+
+networks:
+  traefik-public:
+    external: true
