@@ -2,8 +2,7 @@ version: '3.8'
 
 services:
   rstudio:
-    image: tylurp/pirate-rstudio:v0.0.1
-    #user: 'root'
+    image: ghcr.io/tylurp/pirate-rstudio:v0.0.1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${HOST_HOME?Variable not set}:${RSTUDIO_HOME?Variable not set}
@@ -11,8 +10,6 @@ services:
     environment:
       - USER=${USERNAME?Variable not set}
       - PASSWORD=${PASSWORD?Variable not set}
-      #- ROOT=TRUE
-      #- ADD=shiny
     networks:
       - traefik-public
     deploy:
