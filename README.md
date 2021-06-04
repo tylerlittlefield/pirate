@@ -36,7 +36,7 @@ Note that this platform uses [bind mounts](https://docs.docker.com/storage/bind-
 * Deploy a blog at `blog.example.com`
 * Deploy a plumber api at `api.example.com`
 * Host a CRAN mirror at `cran.example.com`
-* Mirror you git repositories at `git.example.com`
+* Mirror your git repositories at `git.example.com`
 
 As a demonstration, here are a couple of these features in action, deployed from my Raspberry Pi cluster:
 
