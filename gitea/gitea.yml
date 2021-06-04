@@ -15,8 +15,6 @@ services:
       - GITEA__database__NAME=${DBNAME?Variable not set}
       - GITEA__database__USER=${DBUSER?Variable not set}
       - GITEA__database__PASSWD=${DBPASS?Variable not set}
-    ports:
-      - 22:22
     networks:
       - traefik-public
     deploy:
