@@ -1,6 +1,7 @@
-# pirate 0.2.1 (unreleased)
+# pirate 0.3.0
 
 * Updated actions to push images to github container registry (https://ghcr.io).
+* Added gitea stack.
 
 # pirate 0.2.0
 
