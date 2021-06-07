@@ -1,4 +1,4 @@
-# pirate 0.4.0
+# pirate 0.4.0 (unreleased)
 
 * Added minio stack.
 
