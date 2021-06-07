@@ -1,3 +1,7 @@
+# pirate 0.4.0
+
+* Added minio stack.
+
 # pirate 0.3.0
 
 * Updated actions to push images to github container registry (https://ghcr.io).
