@@ -17,7 +17,7 @@ export DOMAIN=api.example.com
 export HOSTNAME=main
 ```
 
-Note that since the image is self-container (i.e. doesn't require bind mounts), you can deploy this to multiple worker nodes in your cluster by updating `plumber.yml` to:
+Note that since the image is self-contained (i.e. doesn't require bind mounts), you can deploy this to multiple worker nodes in your cluster by updating `plumber.yml` to:
 
 ```yaml
 deploy:
