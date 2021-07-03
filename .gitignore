@@ -9,5 +9,6 @@ shiny/env.txt
 plumber/env.txt
 gitea/env.txt
 minio/env.txt
+jupyter/env.txt
 .Rproj.user
 pirate.Rproj

@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+  jupyter:
+    image: sakuraiyuta/datascience-notebook:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${HOST_HOME?Variable not set}:/home/jovyan/work
+    networks:
+      - traefik-public
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik-public
+        - traefik.constraint-label=traefik-public
+        - traefik.http.routers.jupyter-http.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.jupyter-http.entrypoints=http
+        - traefik.http.routers.jupyter-http.middlewares=https-redirect
+        - traefik.http.routers.jupyter-https.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.jupyter-https.entrypoints=https
+        - traefik.http.routers.jupyter-https.tls=true
+        - traefik.http.routers.jupyter-https.tls.certresolver=le
+        - traefik.http.services.jupyter.loadbalancer.server.port=80
+networks:
+  traefik-public:
+    external: true
